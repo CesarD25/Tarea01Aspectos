@@ -12,11 +12,6 @@ Esta aplicación implementa el patrón Observer usando AspectJ.
 
 ## Funcionalidad adicional
 
-Se implementa un contador de cambios dentro del aspecto, que lleva la cuenta cada vez que cambia el color de fondo. Este comportamiento transversal está completamente desacoplado de la lógica principal (ventana y botones).
+Se implementa un contador de cambios dentro del aspecto, que lleva la cuenta cada vez que cambia el color de fondo.
 
-## Instrucciones
 
-1. Importa el proyecto en Eclipse.
-2. Clic derecho en el proyecto → **Configure → Convert to AspectJ Project**.
-3. Asegúrate de tener instalado **AspectJ Development Tools (AJDT)**.
-4. Ejecuta `ColorWindow.java` como aplicación Java.

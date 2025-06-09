@@ -1,23 +1,33 @@
 package observer;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public aspect ColorObserverAspect {
-    
-    // Punto de corte: cuando se llama al método setBackgroundColor
-    pointcut colorChanged(Color c): 
-        execution(void ColorWindow.setBackgroundColor(Color)) && args(c);
 
-    // Advice después de cambiar color para imprimir en consola
+    private int changeCount = 0;
+
+    // Punto de corte: cuando se ejecuta setBackgroundColor con un Color
+    pointcut colorChanged(Color c):
+        execution(void observer.ColorWindow.setBackgroundColor(Color)) && args(c);
+
     after(Color c): colorChanged(c) {
+        changeCount++;
         System.out.println("El color de fondo cambió a: " + colorToString(c));
+        System.out.println("Cambios totales realizados: " + changeCount);
+
+        // Funcionalidad extra: mostrar un mensaje cada 3 cambios
+        if (changeCount % 3 == 0) {
+            JOptionPane.showMessageDialog(null, "¡Has cambiado el color 3 veces!");
+        }
     }
 
-    // Método auxiliar para convertir Color a String legible
     private String colorToString(Color color) {
         if (Color.RED.equals(color)) return "Rojo";
         if (Color.GREEN.equals(color)) return "Verde";
         if (Color.BLUE.equals(color)) return "Azul";
-        return "Color desconocido";
+        if (Color.WHITE.equals(color)) return "Blanco";
+        return "RGB(" + color.getRed() + ", " + color.getGreen() + ", " + color.getBlue() + ")";
     }
 }
+
